@@ -1,9 +1,0 @@
-env/
-__pycache__/
-.DS_Store
-*.sqlite3
-*.code-workspace
-*.db
-*.sqlite3
-*.env
-.vscode/
