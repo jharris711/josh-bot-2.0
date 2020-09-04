@@ -1,0 +1,15 @@
+version: '2'
+services:
+    src:
+        build:
+            context: ./
+            dockerfile: ./josh_bot_2.0/backend/Dockerfile
+        ports:
+            - "5000:5000"
+    ui:
+        build:
+            context: ./
+            dockerfile: ./josh_bot_2.0/ui/Dockerfile
+        ports:
+            - "3000:3000"
+        stdin_open: true
