@@ -1,29 +1,27 @@
-# Flask App Boilerplate
+# Josh Bot 2.0 - Flask Backend
 
-Quick start for Flask apps. Procfile is added for Heroku deployment with Gunicorn. Requirements.txt will install Flask, Flask-migrate, flask-SQLAlchemy, Flask-WTForms, Gunicorn, and Python-dotenv.
+---
 
-Pre-reqs: Virtualenv, PostgreSQL (recommended) or SQLite3
+### To run:
 
-To use:
-    
--> Open your terminal
+###### Navigate into backend directory:
+```bash
+$ cd josh_bot_2.0/backend
+```
 
--> Navigate to the `flask_app_boilerplate` dir
+###### Create, then start Virtual Env
+```bash
+$ python3.8 -m venv env
+$ . env/bin/activate
+```
 
--> Set up a virtualenv environment: ` $ virtualenv env `
+###### Upgrade pip, then install requirements:
+```bash
+$ pip install --upgrade pip
+$ pip install -r requirements
+```
 
--> Activate virtual environment: ` $ source env/bin/activate `
-
--> Install dependencies: ` $ pip install -r requirements.txt `
-
--> Set .env variables
-
--> Configure .gitignore
-
--> Create your models in models.py: Declaring models => https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/
-
--> Initialize DB: ` $ flask db init `
-
--> Make migrations: ` $ flask db migrate `
-
--> Apply migrations: ` $ flask db upgrade `
+###### Finally, run Flask server:
+```bash
+flask run
+```
