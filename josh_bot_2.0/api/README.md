@@ -4,7 +4,7 @@
 
 ###### Navigate into backend directory:
 ```bash
-$ cd josh_bot_2.0/backend
+$ cd josh_bot_2.0/api
 ```
 
 ###### Create, then start Virtual Env
