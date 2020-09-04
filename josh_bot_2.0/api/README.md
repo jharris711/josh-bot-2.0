@@ -1,7 +1,5 @@
 # Josh Bot 2.0 - Flask Backend
 
----
-
 ### To run:
 
 ###### Navigate into backend directory:
