@@ -1,5 +1,4 @@
 # Josh Bot 2.0 - React Front-end/Admin Panel
----
 
 ### To start:
 ###### Navigate into the ui directory:
