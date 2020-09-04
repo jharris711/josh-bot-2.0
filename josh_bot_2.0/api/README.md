@@ -21,5 +21,5 @@ $ pip install -r requirements
 
 ###### Finally, run Flask server:
 ```bash
-flask run
+$ flask run
 ```
