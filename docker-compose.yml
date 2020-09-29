@@ -3,7 +3,7 @@ services:
     src:
         build:
             context: ./
-            dockerfile: ./josh_bot_2.0/backend/Dockerfile
+            dockerfile: ./josh_bot_2.0/api/Dockerfile
         ports:
             - "5000:5000"
     ui:

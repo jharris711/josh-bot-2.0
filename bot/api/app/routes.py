@@ -3,7 +3,7 @@ from flask import current_app as app
 from os import getenv, environ
 from time import sleep
 from tweepy import Cursor, TweepError, API, OAuthHandler
-
+from flask_cors import cross_origin
 from .models import db
 
 
@@ -16,6 +16,7 @@ api_secret = environ.get("CONSUMER_SECRET")
 access_token = environ.get("API_KEY")
 # Access token secret: 
 access_token_secret = environ.get("API_SECRET")
+
 # ---------------------------------- Tweepy ---------------------------------- #
 # Tweepy 0Auth 1a authentication:
 auth = OAuthHandler(api_key, api_secret)
@@ -40,6 +41,7 @@ def lookup_user_and_return_id_sn_object(user_id):
 
 # Returns follower ids in JSON Object:
 @app.route('/my-followers', methods=['GET'])
+@cross_origin()
 def get_my_followers():
     follower_id_list = []
     user_list = []
@@ -58,7 +60,21 @@ def get_my_followers():
         pass
 
 
+@app.route('/myfollowers/<string:uid>', methods=['GET'])
+@cross_origin()
+def get_single_follower(userid):
+    try:
+        user = api.get_user(userid)
+        response = (user, 200)
+        return response
+    except TweepError as error:
+        print(f"-> Error: {error.reason}")
+        pass
+
+
+
 @app.route('/people-i-follow', methods=['GET'])
+@cross_origin()
 def get_people_i_follow():
     following_id_list = []
     user_list = []

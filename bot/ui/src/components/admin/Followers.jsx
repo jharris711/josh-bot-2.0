@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { connect } from 'react-redux'
 import { 
@@ -15,8 +15,11 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
+import MUIDataTable from "mui-datatables"
+
 import Loading from './Loading'
 import UserCard from './UserCard'
+import SelectedFollowerCard from './SelectedFollowerCard'
 
 
 const useStyles = makeStyles({
@@ -57,47 +60,64 @@ const Followers = ({
     getMyFollowers,
     getPeopleIFollow,
 }) => {
+    const [followers, setFollowers] = useState([])
+    const [selectedFollower, setSelectedFollower] = useState([])
     const classes = useStyles();
 
     const handleOnClick = () => {
         getMyFollowers()
     }
 
-    const gen_follower_display = () => {
-        const users = []
-        if (my_followers !== []) {
-            my_followers.forEach(follower => {
-                users.push({
-                    uid: follower[0],
-                    sn: follower[1],
-                })
-            })
-        const display = users.map((user, index) => <UserCard key={index} uid={user.uid} sn={user.sn}/>)
-        return display        
+    useEffect(() => {
+        const gen_follower_array = () => {
+            const users = []
+            if (my_followers !== []) {
+                my_followers.forEach(follower => {
+                    users.push({
+                        uid: follower[0],
+                        sn: follower[1],
+                    })
+                })      
+            }
+            return users
         }
-    }
+        setFollowers(gen_follower_array())
+    }, [my_followers])
+    
 
-    const DisplaySpinnerFollowersOrError = () => {
-        if (get_followers_loading) {
-            return (
-                <div className={classes.root}>
-                    <Loading />
-                </div>
-            )
-        } else if (people_i_follow) {
-            return (
-                <div className={classes.cards}>
-                    {gen_follower_display()}
-                </div>
-            )
-        } else if (get_followers_error) {
-            return <h2>{get_followers_error}</h2>
+    const columns = [
+        {
+            name: "uid",
+            label: "User ID",
+            options: {
+                filter: true,
+                sort: true,
+            }
+        },
+        {
+            name: "sn",
+            label: "Screen-Name",
+            options: {
+                filter: true,
+                sort: true,
+            }
+        },
+    ]
+    const options = {
+        filterType: 'checkbox',
+        selectableRows: 'single',
+        onRowSelectionChange: (currentRowsSelected, allRowsSelected, rowsSelected) => {
+            console.log('Row Selected:', rowsSelected)
+            let temp = []
+            rowsSelected.forEach(row => temp.push(my_followers[row]))
+            setSelectedFollower(temp)
+            console.log(temp)
         }
     }
 
 
     return (
-        <React.Fragment>
+        <>
             <CssBaseline />
             <Container maxWidth="lg">
                 <Card className={classes.container}>
@@ -105,11 +125,17 @@ const Followers = ({
                         <Button size="small" onClick={() => handleOnClick()}>Refresh</Button>
                     </CardActions>
                     <CardContent>
-                        {DisplaySpinnerFollowersOrError()}
+                        <MUIDataTable
+                            title={"Your Followers"}
+                            data={followers}
+                            columns={columns}
+                            options={options}
+                        />
                     </CardContent>
                 </Card>
             </Container>
-        </React.Fragment>
+            <SelectedFollowerCard follower={selectedFollower} />
+        </>
     )
 }
 
