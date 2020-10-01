@@ -45,17 +45,3 @@ $ . env/bin/activate
 (env)$ flask run
 ```
 *Back-end/API Server will be running at http://localhost:5000*
-
----
-## This bot is run with Docker Containers
-
-### To start the bot:
-```bash
-$ bash start.sh
-```
-
-
-### To stop the bot:
-```bash
-$ bash stop.sh
-```
