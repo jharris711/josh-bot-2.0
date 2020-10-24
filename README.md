@@ -1,4 +1,4 @@
-# Jost Bot 2.0 - A Python and JavaScript Twitter Bot
+# Josh Bot 2.0 - A Python and JavaScript Twitter Bot
 
 ## For development purposes:
 ### To start front-end:
